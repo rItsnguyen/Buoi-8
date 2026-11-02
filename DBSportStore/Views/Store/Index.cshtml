@@ -1,0 +1,283 @@
+﻿@* View nhận danh sách ProductCardViewModel từ StoreController *@
+@model DBSportStore.Models.StoreHomeViewModel
+
+@* Thiết lập tiêu đề và Layout dùng chung *@
+@{
+    ViewBag.Title = "Trang chủ"; // tiêu đề trên tab trình duyệt
+    Layout = "~/Views/Shared/_StoreLayout.cshtml"; // dùng Layout chung
+}
+
+<!-- ===== HERO BANNER ===== -->
+<section class="hero">
+    <div>
+        <p>NEW SEASON / SPORT & ACTIVE</p>
+        <h1>Move better. Train stronger.</h1>
+        <p>Khám phá bộ sưu tập thể thao dành cho tập luyện, thi đấu và phong cách sống năng động.</p>
+        <a class="btn-brand" href="#featured-products">Mua sắm ngay</a>
+    </div>
+</section>
+
+<div class="catalog-toolbar">
+    @using (Html.BeginForm(
+        "Index",
+        "Store",
+        FormMethod.Get,
+        new { @class = "catalog-search" }))
+    {
+        @* Nếu đang lọc Category thì giữ categoryId khi tìm kiếm. *@
+        if (Model.SelectedCategoryId.HasValue)
+        {
+            <input type="hidden"
+                   name="categoryId"
+                   value="@Model.SelectedCategoryId" />
+        }
+
+        <input type="text"
+               name="keyword"
+               value="@Model.SearchTerm"
+               placeholder="Tìm tên hoặc mô tả sản phẩm..." />
+
+        <button type="submit" class="btn-brand">
+            Tìm kiếm
+        </button>
+
+        <a class="btn-soft"
+           href="@Url.Action("Index", "Store")">
+            Xóa lọc
+        </a>
+        <input type="text"
+               name="keyword"
+               value="@Model.SearchTerm"
+               placeholder="Tìm tên hoặc mô tả sản phẩm..." />
+
+        @* MỚI: giá tối thiểu; có thể để trống *@
+        <input type="number"
+               name="minPrice"
+               value="@Model.MinPrice"
+               min="0"
+               step="1000"
+               placeholder="Giá từ" />
+
+        @* MỚI: giá tối đa; có thể để trống *@
+        <input type="number"
+               name="maxPrice"
+               value="@Model.MaxPrice"
+               min="0"
+               step="1000"
+               placeholder="Giá đến" />
+
+
+        <button type="submit" class="btn-brand">
+            Tìm kiếm
+        </button>
+
+        <div class="sort-buttons" style="margin-top: 10px;">
+            Sắp xếp:
+            <a href="@Url.Action("Index", "Store", new { categoryId = Model.SelectedCategoryId,keyword = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice, sortOrder = "price_asc" })" class="btn-soft">Giá thấp → cao</a>
+            <a href="@Url.Action("Index", "Store", new { categoryId = Model.SelectedCategoryId, keyword = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice, sortOrder = "price_desc" })" class="btn-soft">Giá cao → thấp</a>
+        </div>
+    }
+</div>
+
+<!-- Tiêu đề khu vực sản phẩm nổi bật -->
+<h2 class="section-title">Tất cả sản phẩm</h2>
+
+<!-- ===== KHUNG CHÍNH: danh mục trái + sản phẩm phải ===== -->
+<div class="store-shell" id="featured-products">
+    <!-- Danh mục tạm; Buổi 06 sẽ lấy từ database -->
+    <aside class="category-panel">
+        <h3>Danh mục</h3>
+        <ul class="category-list">
+            <li>
+                @* Không truyền categoryId => xem toàn bộ sản phẩm. *@
+                <a href="@Url.Action("Index", "Store")" class="@(Model.SelectedCategoryId == null ? "active-category" : "")">
+                    Tất cả sản phẩm
+                </a>
+            </li>
+
+            @foreach (var category in Model.Categories)
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Store", new { categoryId = category.CategoryID, keyword = Model.SearchTerm, minPrice = Model.MinPrice, maxPrice = Model.MaxPrice, sortOrder = Model.SortOrder })" 
+               class="@(Model.SelectedCategoryId == category.CategoryID ? "active-category" : "")">
+                    @* categoryId sẽ được gửi về StoreController.Index(). *@
+                    <!--<a href="@Url.Action(
+                            "Index",
+                            "Store",
+                            new
+    {
+        categoryId = category.CategoryID,
+        keyword = Model.SearchTerm,
+        minPrice = Model.MinPrice,
+        maxPrice = Model.MaxPrice
+    })">-->
+                        @category.CategoryName
+                    </a>
+
+                </li>
+            }
+        </ul>
+    </aside>
+    <section>
+        @* ===== DANH SÁCH SẢN PHẨM ===== *@
+        @* Kiểm tra danh sách Products có sản phẩm hay không *@
+        @if (Model.Products.Any())
+        {
+            <div class="result-count" style="margin-bottom: 15px; font-weight: bold; color: #2563eb;">
+                Tìm thấy @Model.TotalItems sản phẩm
+            </div>
+            @* Có sản phẩm → hiển thị danh sách sản phẩm *@
+            <div class="product-grid">
+
+                @foreach (var item in Model.Products)
+                {
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            @* Hiển thị ảnh sản phẩm từ Content/images *@
+                            <img src="~/Content/images/@item.ImagePro"
+                                 alt="@item.NamePro" />
+
+                        </div>
+
+                        <div class="product-body">
+
+                            @* Tên danh mục của sản phẩm *@
+                            <div style="color:#64748b;font-size:13px;">
+                                @item.CategoryName
+                            </div>
+
+                            @* Tên sản phẩm *@
+                            <div class="product-name">
+                                @item.NamePro
+                            </div>
+
+                            @* Mô tả ngắn sản phẩm *@
+                            <div class="product-description">
+                                @item.ShortDescription
+                            </div>
+
+                            @* Đơn giá, định dạng có dấu phân cách hàng nghìn *@
+                            <div class="product-price">
+                                @item.Price.ToString("#,##0") đ
+                            </div>
+
+                            <div class="product-actions">
+                                @* Chức năng Chi tiết *@
+                                @Html.ActionLink(
+                                    "Chi tiết",                  // Chữ hiển thị
+                                    "Details",                   // Action Details
+                                    "Products",                  // ProductsController
+                                    new { id = item.ProductId }, // Gửi ProductID của sản phẩm đang xem
+                                    new { @class = "btn-soft" }  // Giữ nguyên CSS
+                                    )
+                                @* B07 mới thực hiện chức năng Giỏ hàng *@
+                                @Html.ActionLink(
+                                    "Mua",                       // Chữ hiển thị
+                                    "AddToCart",                 // Action thêm giỏ
+                                    "ShoppingCart",              // Controller giỏ hàng
+                                    new { id = item.ProductId }, // Gửi ProductID đang chọn
+                                    new { @class = "btn-brand" } // Giữ CSS nút Mua
+                                )
+
+
+                            </div>
+
+                        </div>
+
+                    </article>
+                }
+
+            </div>
+        }
+        else
+        {
+            @* Không có sản phẩm phù hợp sau khi lọc hoặc tìm kiếm *@
+            <div class="catalog-empty">
+
+                <h3>Không tìm thấy sản phẩm phù hợp</h3>
+
+                <p>
+                    Không có sản phẩm nào phù hợp với
+                    các điều kiện lọc hoặc từ khóa đang chọn.
+                </p>
+
+                @* Quay về Trang Chủ và xóa toàn bộ điều kiện lọc / tìm kiếm *@
+                <a class="btn-brand"
+                   href="@Url.Action("Index", "Store")">
+                    Xem tất cả sản phẩm
+                </a>
+            </div>
+        }
+        @* ==================== PHÂN TRANG ==================== *@
+        @if (Model.TotalPages > 1)
+        {
+            <div class="store-pagination">
+
+                @* Nút quay về trang trước *@
+                @if (Model.CurrentPage > 1)
+                {
+                    <a href="@Url.Action(
+            "Index",
+            "Store",
+            new
+            {
+                categoryId = Model.SelectedCategoryId,
+                keyword = Model.SearchTerm,
+                minPrice = Model.MinPrice,
+                maxPrice = Model.MaxPrice,
+                page = Model.CurrentPage - 1
+            })">
+                        ← Trước
+                    </a>
+                }
+
+                @* Hiển thị các số trang *@
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        @* Trang hiện tại không cần tạo link *@
+                        <span class="active">@i</span>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action(
+                "Index",
+                "Store",
+                new
+                {
+                    categoryId = Model.SelectedCategoryId,
+                    keyword = Model.SearchTerm,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    page = i
+                })">
+                            @i
+                        </a>
+                    }
+                }
+
+                @* Nút sang trang kế tiếp *@
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <a href="@Url.Action(
+            "Index",
+            "Store",
+            new
+            {
+                categoryId = Model.SelectedCategoryId,
+                keyword = Model.SearchTerm,
+                minPrice = Model.MinPrice,
+                maxPrice = Model.MaxPrice,
+                page = Model.CurrentPage + 1
+            })">
+                        Sau →
+                    </a>
+                }
+
+            </div>
+        }
+    </section>
+</div>

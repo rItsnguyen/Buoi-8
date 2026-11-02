@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DBSportStore.Models.Customer>
+
+@{
+    ViewBag.Title = "Quản lý khách hàng";
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+
+<h2 class="section-title">QUẢN LÝ KHÁCH HÀNG</h2>
+
+<p>
+    @Html.ActionLink(
+        "Thêm khách hàng mới",
+        "Create",
+        null,
+        new { @class = "btn-brand" })
+</p>
+        <table class="table">
+            <tr>
+                <th>
+                    Họ tên
+                </th>
+                <th>
+                    Điện thoại
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserAccount.UserName)
+                </th>
+                <th>
+                    Thao tác
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserAccount.UserName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                    </td>
+                </tr>
+            }
+
+        </table>

@@ -1,0 +1,1190 @@
+﻿:root {
+    --brand: #2563eb; /* Màu cam chủ đạo của website */
+    --brand-dark: #1d4ed8; /* Màu cam đậm, dùng khi hover */
+    --ink: #0f172a; /* Màu chữ chính */
+    --muted: #64748b; /* Màu chữ phụ, chữ mô tả */
+    --line: #e2e8f0; /* Màu đường viền */
+    --surface: #ffffff; /* Màu nền trắng của card */
+    --page: #f8fafc; /* Màu nền chung của toàn trang */
+}
+
+/* =========================================================
+   2. THIẾT LẬP CHUNG CHO TẤT CẢ PHẦN TỬ
+   ========================================================= */
+* {
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   3. GIAO DIỆN CHUNG CỦA TRANG
+   ========================================================= */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--page);
+}
+
+/* =========================================================
+   4. THANH THÔNG BÁO TRÊN CÙNG
+   ========================================================= */
+.store-topbar {
+    background: #0f172a;
+    color: #cbd5e1;
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+/* =========================================================
+   5. HEADER: LOGO + MENU
+   ========================================================= */
+.store-header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    .store-header .container {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+/* =========================================================
+   6. LOGO SPORTSTORE
+   ========================================================= */
+.brand {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+    .brand span {
+        color: var(--brand);
+    }
+
+/* =========================================================
+   7. MENU ĐIỀU HƯỚNG
+   ========================================================= */
+.store-nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-left: auto;
+}
+
+    .store-nav a {
+        color: #334155;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .store-nav a:hover {
+            color: var(--brand);
+        }
+
+/* =========================================================
+   8. HERO BANNER - VÙNG QUẢNG BÁ ĐẦU TRANG
+   ========================================================= */
+.hero {
+    min-height: 360px;
+    border-radius: 24px;
+    padding: 56px;
+    margin: 28px 0;
+    color: white;
+    background: linear-gradient( 110deg, rgba(15,23,42,.96), rgba(15,23,42,.55) ), linear-gradient( 135deg, #1e293b, #0f172a );
+    display: flex;
+    align-items: center;
+}
+
+    .hero h1 {
+        font-size: 48px;
+        line-height: 1.05;
+        margin: 0 0 14px;
+        max-width: 650px;
+    }
+
+    .hero p {
+        max-width: 580px;
+        color: #e2e8f0;
+        font-size: 18px;
+    }
+
+/* =========================================================
+   9. NÚT CHÍNH MÀU CAM
+   ========================================================= */
+.btn-brand {
+    display: inline-block;
+    background: var(--brand);
+    color: white !important;
+    border: 0;
+    border-radius: 16px;
+    padding: 11px 18px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+    .btn-brand:hover {
+        background: var(--brand-dark);
+    }
+
+/* =========================================================
+   10. TIÊU ĐỀ CÁC KHU VỰC
+   ========================================================= */
+.section-title {
+    margin: 34px 0 16px;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+/* =========================================================
+   11. KHUNG CHÍNH: DANH MỤC + DANH SÁCH SẢN PHẨM
+   ========================================================= */
+.store-shell {
+    display: grid;
+    grid-template-columns: 230px minmax(0,1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+/* =========================================================
+   12. CỘT DANH MỤC BÊN TRÁI
+   ========================================================= */
+.category-panel {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+    position: sticky;
+    top: 92px;
+}
+
+    .category-panel h3 {
+        margin-top: 0;
+        font-size: 18px;
+    }
+
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .category-list a {
+        display: block;
+        padding: 10px 12px;
+        margin-bottom: 6px;
+        border-radius: 10px;
+        color: #334155;
+        text-decoration: none;
+    }
+
+        .category-list a:hover {
+            background: #fff7ed;
+            color: var(--brand-dark);
+        }
+
+/* =========================================================
+   13. LƯỚI SẢN PHẨM
+   ========================================================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 18px;
+}
+
+/* =========================================================
+   14. PRODUCT CARD
+   ========================================================= */
+.product-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+}
+
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 35px rgba(15,23,42,.18);
+    }
+
+/* =========================================================
+   15. ẢNH SẢN PHẨM
+   ========================================================= */
+.product-image {
+    height: 220px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+/* =========================================================
+   16. THÔNG TIN SẢN PHẨM
+   ========================================================= */
+.product-body {
+    padding: 16px;
+}
+
+.product-name {
+    font-weight: 700;
+    min-height: 44px;
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   17. GIÁ SẢN PHẨM
+   ========================================================= */
+.product-price {
+    color: #dc2626;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+/* =========================================================
+   18. NHÓM NÚT CHI TIẾT / MUA
+   ========================================================= */
+.product-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.btn-soft {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 9px 12px;
+    color: #334155;
+    text-decoration: none;
+    background: white;
+}
+
+/* =========================================================
+   19. KHU VỰC TÌM KIẾM
+   SẼ DÙNG Ở BUỔI 06
+   ========================================================= */
+.search-panel {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 18px;
+}
+
+.form-control-modern {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 11px 12px;
+    outline: none;
+}
+
+    .form-control-modern:focus {
+        border-color: #fb923c;
+        box-shadow: 0 0 0 3px #ffedd5;
+    }
+
+/* =========================================================
+   20. CARD LOGIN / CHECKOUT / ADMIN
+   DÙNG Ở CÁC BUỔI SAU
+   ========================================================= */
+.auth-card,
+.checkout-card,
+.admin-card {
+    max-width: 520px;
+    margin: 38px auto;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 16px 40px rgba(15,23,42,.08);
+}
+
+/* =========================================================
+   21. BẢNG GIỎ HÀNG
+   DÙNG Ở BUỔI 07
+   ========================================================= */
+.cart-table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+    .cart-table th,
+    .cart-table td {
+        padding: 14px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+    }
+
+/* =========================================================
+   22. KHUNG TỔNG TIỀN GIỎ HÀNG
+   ========================================================= */
+.cart-summary {
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    max-width: 360px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+/* =========================================================
+   23. FOOTER
+   ========================================================= */
+.store-footer {
+    margin-top: 48px;
+    padding: 40px 0;
+    color: #cbd5e1;
+    background: #0f172a;
+}
+
+    .store-footer strong {
+        color: white;
+    }
+
+/* =========================================================
+   24. RESPONSIVE CHO TABLET
+   Khi màn hình <= 992px
+   ========================================================= */
+@media (max-width: 992px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .store-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .category-panel {
+        position: static;
+    }
+}
+
+/* =========================================================
+   25. RESPONSIVE CHO MOBILE
+   Khi màn hình <= 640px
+   ========================================================= */
+@media (max-width: 640px) {
+
+    .hero {
+        padding: 28px;
+        min-height: 300px;
+    }
+
+        .hero h1 {
+            font-size: 36px;
+        }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .store-nav {
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .product-description {
+        font-size: 14px;
+        color: #64748b;
+        margin-bottom: 10px;
+        min-height: 40px;
+    }
+}
+/* =========================================================
+   B06 - TÌM KIẾM
+   Các style dùng cho thanh tìm kiếm và thông báo không có kết quả
+   ========================================================= */
+
+
+/* ==================== THANH TÌM KIẾM ==================== */
+
+/* Khối bao ngoài toàn bộ khu vực tìm kiếm */
+.catalog-toolbar {
+    margin: 20px 0 24px;
+    /* Khoảng cách:
+       - trên: 20px
+       - phải: 0
+       - dưới: 24px
+       - trái: 0
+    */
+}
+
+
+/* Form tìm kiếm */
+.catalog-search {
+    display: flex;
+    /* Sắp xếp ô nhập, nút Tìm kiếm, nút Xóa lọc
+       nằm trên cùng một hàng */
+
+    gap: 10px;
+    /* Khoảng cách giữa các phần tử trong form là 10px */
+
+    flex-wrap: wrap;
+    /* Nếu màn hình hẹp, các phần tử được phép xuống hàng
+       thay vì tràn ra ngoài */
+}
+
+
+    /* ==================== Ô NHẬP TỪ KHÓA ==================== */
+
+    /* Chỉ áp dụng cho input type="text"
+   nằm bên trong class catalog-search */
+    /* Áp dụng chung cho ô từ khóa và hai ô Giá từ/Giá đến cho input type="text"
+nằm bên trong class catalog-search */
+    .catalog-search input[type="text"],
+    .catalog-search input[type="number"] {
+        flex: 1; /* Các ô tự giãn theo chiều ngang */
+        min-width: 170px; /* Không cho ô quá hẹp */
+        padding: 11px 14px; /* Khoảng cách chữ với viền */
+        border: 1px solid #cbd5e1; /* Viền xám nhạt */
+        border-radius: 10px; /* Bo góc */
+        outline: none; /* Bỏ outline mặc định */
+    }
+/* ==================== KHÔNG CÓ KẾT QUẢ ==================== */
+
+/* Khối thông báo khi Model.Products không có sản phẩm */
+.catalog-empty {
+    padding: 24px;
+    /* Tạo khoảng trống bên trong khối thông báo */
+
+    background: #ffffff;
+    /* Nền màu trắng */
+
+    border: 1px solid #e2e8f0;
+    /* Viền xám nhạt */
+
+    border-radius: 12px;
+    /* Bo tròn góc khối thông báo */
+
+    color: #64748b;
+    /* Màu chữ xám xanh nhạt */
+
+    text-align: center;
+    /* Canh giữa nội dung trong khối */
+}
+    /* Tiêu đề trong khối không có kết quả */
+    .catalog-empty h3 {
+        margin-bottom: 8px;
+        /* Tạo khoảng cách dưới tiêu đề */
+    }
+
+
+    /* Đoạn mô tả trong khối không có kết quả */
+    .catalog-empty p {
+        margin-bottom: 18px;
+        /* Tạo khoảng cách trước nút */
+
+        color: #64748b;
+        /* Dùng màu chữ nhẹ hơn tiêu đề */
+    }
+/* =========================================================
+   B06 - PHÂN TRANG
+   Các style dùng cho các nút Trước, số trang, Sau
+   ========================================================= */
+
+
+/* ==================== KHỐI PHÂN TRANG ==================== */
+
+/* Khối bao ngoài toàn bộ các nút phân trang */
+.store-pagination {
+    display: flex;
+    /* Sắp xếp các nút phân trang trên cùng một hàng */
+
+    justify-content: center;
+    /* Canh giữa toàn bộ nhóm nút phân trang */
+
+    gap: 6px;
+    /* Khoảng cách giữa các nút là 6px */
+
+    flex-wrap: wrap;
+    /* Nếu màn hình hẹp, các nút được phép xuống hàng */
+
+    margin-top: 24px;
+    /* Tạo khoảng cách 24px phía trên,
+       tách phân trang khỏi danh sách sản phẩm */
+}
+
+
+    /* ==================== KIỂU CHUNG CHO CÁC NÚT ==================== */
+
+    /* Áp dụng chung cho:
+   - thẻ <a>: các trang có thể click
+   - thẻ <span>: trang hiện tại */
+    .store-pagination a,
+    .store-pagination span {
+        min-width: 36px;
+        /* Chiều rộng tối thiểu của mỗi nút */
+
+        padding: 8px 11px;
+        /* Khoảng cách nội dung với viền:
+       - trên/dưới: 8px
+       - trái/phải: 11px
+    */
+
+        border: 1px solid #cbd5e1;
+        /* Viền xám nhạt dày 1px */
+
+        border-radius: 8px;
+        /* Bo tròn các góc của nút */
+
+        background: #ffffff;
+        /* Nền trắng */
+
+        color: #0f172a;
+        /* Màu chữ xanh đen */
+
+        text-decoration: none;
+        /* Bỏ gạch chân mặc định của thẻ <a> */
+
+        text-align: center;
+        /* Canh giữa số trang hoặc chữ trong nút */
+    }
+
+
+    /* ==================== TRANG HIỆN TẠI ==================== */
+
+    /* Áp dụng cho:
+   <span class="active">...</span>
+   để làm nổi bật trang đang xem */
+    .store-pagination .active {
+        background: #2563eb;
+        /* Nền xanh cho trang hiện tại */
+
+        color: #ffffff;
+        /* Chữ màu trắng */
+
+        border-color: #2563eb;
+        /* Viền cùng màu với nền */
+
+        font-weight: 700;
+        /* Chữ đậm để trang hiện tại nổi bật hơn */
+    }
+
+
+    /* ==================== HIỆU ỨNG KHI RÊ CHUỘT ==================== */
+
+    /* Khi rê chuột lên các link phân trang */
+    .store-pagination a:hover {
+        background: #f1f5f9;
+        /* Đổi nền sang xám nhạt để người dùng biết
+       đây là nút có thể click */
+    }
+.category-list a.active-category {
+    font-weight: bold;
+    color: #2563eb; /* Chữ màu xanh dương nổi bật */
+    text-decoration: underline;
+}
+
+/* =========================================================
+   B07 - GIỎ HÀNG
+   ========================================================= */
+/* Cho phép cuộn ngang nếu bảng quá rộng trên màn hình nhỏ */
+.cart-table-wrap {
+    overflow-x: auto;
+}
+
+
+/* Bảng giỏ hàng chiếm toàn bộ chiều rộng */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse; /* Gộp đường viền giữa các ô */
+    background: #ffffff;
+}
+
+
+    /* Định dạng chung cho tiêu đề và ô dữ liệu */
+    .cart-table th,
+    .cart-table td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+
+/* Sắp xếp ảnh và thông tin sản phẩm trên cùng một hàng */
+.cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+    /* Kích thước ảnh sản phẩm trong giỏ */
+    .cart-product img {
+        width: 72px;
+        height: 72px;
+        object-fit: cover; /* Ảnh vừa khung, không méo */
+        border-radius: 10px;
+    }
+
+
+    /* Dòng hiển thị tồn kho */
+    .cart-product small {
+        display: block;
+        margin-top: 4px;
+        color: #64748b;
+    }
+
+
+/* Form cập nhật số lượng nằm trên cùng một hàng */
+.qty-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+    /* Ô nhập số lượng */
+    .qty-form input[type="number"] {
+        width: 75px;
+        padding: 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+    }
+
+
+/* Khối tổng kết giỏ hàng */
+.cart-summary {
+    margin-top: 22px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    /* sắp xếp nội dung theo chiều dọc */
+    display: flex;
+    flex-direction: column;
+    /* tạo khoảng cách giữa các dòng */
+    gap: 10px;
+}
+
+
+/* Tổng tiền */
+.cart-total {
+    margin-top: 0;
+    font-size: 18px;
+    /* tạo khoảng cách dòng đủ lớn */
+    line-height: 1.5;
+}
+
+
+/* Khu vực các nút */
+.cart-summary-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* cách phần tổng tiền phía trên */
+    margin-top: 6px;
+}
+
+/* Khối thông báo chung */
+.cart-message {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+}
+
+
+/* Màu thông báo lỗi */
+.cart-message-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+/* =========================================================
+   B07 - CHECKOUT
+   ========================================================= */
+
+
+/* ==================== BỐ CỤC CHÍNH ==================== */
+
+.checkout-grid {
+    display: grid;
+    /* Cột trái rộng hơn để nhập thông tin,
+       cột phải hiển thị đơn hàng */
+    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+
+/* Khung form và khung đơn hàng */
+.checkout-form,
+.checkout-summary {
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+
+    /* Tiêu đề trong từng khối */
+    .checkout-form h3,
+    .checkout-summary h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+
+/* =========================================================
+   FORM THÔNG TIN KHÁCH HÀNG
+   ========================================================= */
+
+
+/* Mỗi dòng gồm 2 cột:
+   - Label
+   - Ô nhập */
+.checkout-row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    margin-bottom: 16px;
+}
+
+
+/* Cột Label */
+.checkout-label {
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+
+/* Ô nhập chiếm hết chiều rộng cột */
+.checkout-input .form-control-modern {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+}
+
+
+    /* Khi click vào ô nhập */
+    .checkout-input .form-control-modern:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+
+/* Dòng chứa nút submit */
+.checkout-row-action {
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   TÓM TẮT ĐƠN HÀNG
+   ========================================================= */
+
+
+/* Một sản phẩm trong đơn hàng */
+.checkout-product {
+    display: grid;
+    /* Ảnh - thông tin - thành tiền */
+    grid-template-columns: 70px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+/* Ảnh sản phẩm */
+.checkout-product-image img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+}
+
+
+/* Tên sản phẩm */
+.checkout-product-info strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+
+/* Dòng số lượng / đơn giá */
+.checkout-product-detail {
+    margin-top: 3px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+
+    /* Giá trị bên trong thông tin sản phẩm */
+    .checkout-product-detail span {
+        color: #0f172a;
+    }
+
+
+/* Thành tiền từng sản phẩm */
+.checkout-product-total {
+    font-weight: 700;
+    color: #dc2626;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TỔNG TIỀN ĐƠN HÀNG
+   ========================================================= */
+
+.checkout-grand-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 2px solid #e2e8f0;
+    font-size: 18px;
+}
+
+
+    /* Làm nổi bật tổng tiền */
+    .checkout-grand-total strong {
+        color: #dc2626;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    /* Màn hình nhỏ:
+       Form và đơn hàng chuyển thành 1 cột */
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    /* Trên điện thoại:
+       Label nằm trên ô nhập */
+    .checkout-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .checkout-label {
+        padding-top: 0;
+    }
+
+
+    /* Đơn hàng thu gọn còn:
+       ảnh + thông tin */
+    .checkout-product {
+        grid-template-columns: 60px minmax(0, 1fr);
+    }
+
+
+    /* Thành tiền xuống dòng dưới */
+    .checkout-product-total {
+        grid-column: 2;
+    }
+}
+
+/* =========================================================
+   B07 - ORDER SUCCESS
+   ========================================================= */
+
+
+/* ==================== KHỐI BAO TOÀN TRANG ==================== */
+
+.order-success {
+    /* Tạo khoảng trống phía trên và dưới nội dung */
+    padding: 22px 0;
+}
+
+
+/* ==================== PHẦN TIÊU ĐỀ THÀNH CÔNG ==================== */
+
+.order-success-head {
+    /* Tạo khoảng cách với phần thông tin đơn bên dưới */
+    margin-bottom: 20px;
+}
+
+
+/* ==================== BỐ CỤC THÔNG TIN ĐƠN HÀNG ==================== */
+
+.order-info-grid {
+    display: grid;
+    /* Chia thành 2 cột bằng nhau:
+       - cột thông tin đơn hàng
+       - cột thông tin giao hàng */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* Khoảng cách giữa 2 cột */
+    gap: 18px;
+    /* Khoảng cách với phần Chi tiết đơn hàng */
+    margin-bottom: 24px;
+}
+
+
+/* ==================== TỪNG KHỐI THÔNG TIN ==================== */
+
+.order-info-card {
+    /* Khoảng cách nội dung với viền */
+    padding: 18px;
+    /* Nền trắng */
+    background: #ffffff;
+    /* Viền xám nhạt */
+    border: 1px solid #e2e8f0;
+    /* Bo tròn 4 góc */
+    border-radius: 12px;
+}
+
+
+    /* Tiêu đề bên trong mỗi card */
+    .order-info-card h3 {
+        /* Bỏ khoảng cách mặc định phía trên của h3 */
+        margin-top: 0;
+    }
+
+
+/* ==================== KHU VỰC NÚT THAO TÁC ==================== */
+
+.order-success-actions {
+    /* Tạo khoảng cách với bảng chi tiết đơn hàng */
+    margin-top: 20px;
+}
+
+
+/* ==================== HIỂN THỊ TRÊN MÀN HÌNH NHỎ ==================== */
+
+/* Khi màn hình có chiều rộng <= 760px */
+@media (max-width: 760px) {
+
+    .order-info-grid {
+        /* Chuyển từ 2 cột thành 1 cột
+           để dễ xem trên điện thoại */
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   B08 - SIGN UP / LOGIN
+   ========================================================= */
+
+
+/* ==================== KHUNG BAO TOÀN TRANG AUTH ==================== */
+
+.auth-page {
+    /* Dùng Flexbox để dễ căn khối form đăng ký/đăng nhập */
+    display: flex;
+    /* Căn card nằm giữa theo chiều ngang */
+    justify-content: center;
+    /* Tạo khoảng cách phía trên và dưới trang */
+    padding: 28px 0;
+}
+
+
+/* ==================== CARD CHỨA FORM ==================== */
+
+.auth-card {
+    /* Card có thể chiếm toàn bộ chiều rộng vùng chứa */
+    width: 100%;
+    /* Nhưng không rộng quá 520px */
+    max-width: 520px;
+    /* Khoảng cách từ nội dung tới viền card */
+    padding: 24px;
+    /* Nền trắng */
+    background: #ffffff;
+    /* Viền xám nhạt */
+    border: 1px solid #e2e8f0;
+    /* Bo tròn 4 góc */
+    border-radius: 14px;
+}
+
+
+    /* ==================== TIÊU ĐỀ TRONG CARD ==================== */
+
+    .auth-card h2 {
+        /* Bỏ khoảng cách mặc định phía trên của thẻ h2 */
+        margin-top: 0;
+    }
+
+
+/* ==================== DÒNG MÔ TẢ DƯỚI TIÊU ĐỀ ==================== */
+
+.auth-subtitle {
+    /* Tạo khoảng cách với phần form phía dưới */
+    margin-bottom: 20px;
+    /* Màu chữ xám để phân biệt với tiêu đề chính */
+    color: #64748b;
+}
+
+
+/* ==================== MỖI Ô NHẬP DỮ LIỆU ==================== */
+
+.auth-field {
+    /* Tạo khoảng cách giữa các field:
+       Username, Password, Email... */
+    margin-bottom: 14px;
+}
+
+
+    /* ==================== LABEL CỦA INPUT ==================== */
+
+    .auth-field label {
+        /* Mỗi label nằm trên một dòng riêng */
+        display: block;
+        /* Tạo khoảng cách giữa label và ô input */
+        margin-bottom: 6px;
+        /* Làm chữ label đậm hơn */
+        font-weight: 600;
+    }
+
+
+    /* ==================== Ô INPUT ==================== */
+
+    .auth-field .form-control-modern {
+        /* Input chiếm toàn bộ chiều rộng của card */
+        width: 100%;
+        /*
+       box-sizing: border-box
+       giúp width: 100% đã bao gồm:
+       - padding
+       - border
+
+       Nhờ vậy input không bị rộng vượt ra ngoài card.
+    */
+        box-sizing: border-box;
+        /* Khoảng cách chữ bên trong input */
+        padding: 10px 12px;
+        /* Viền xám nhạt */
+        border: 1px solid #cbd5e1;
+        /* Bo tròn góc input */
+        border-radius: 9px;
+    }
+
+
+        /* ==================== KHI CLICK VÀO INPUT ==================== */
+
+        .auth-field .form-control-modern:focus {
+            /*
+       Bỏ đường viền focus mặc định
+       của trình duyệt.
+    */
+            outline: none;
+            /*
+       Khi người dùng đang nhập,
+       đổi màu border sang xanh
+       để biết input đang được chọn.
+    */
+            border-color: #2563eb;
+        }
+
+
+/* ==================== NÚT SUBMIT ==================== */
+
+.auth-submit {
+    /* Nút Đăng ký / Đăng nhập rộng bằng card */
+    width: 100%;
+    /* Tạo khoảng cách với field phía trên */
+    margin-top: 6px;
+}
+
+
+/* ==================== LINK PHÍA DƯỚI FORM ==================== */
+
+.auth-bottom-link {
+    /*
+       Tạo khoảng cách với nút submit.
+       Ví dụ:
+       "Chưa có tài khoản? Đăng ký"
+    */
+    margin-top: 16px;
+    /* Căn nội dung ra giữa */
+    text-align: center;
+}
+
+
+/* ==================== THÔNG BÁO VALIDATION ==================== */
+
+.text-danger {
+    /* Hiển thị thông báo lỗi bằng màu đỏ */
+    color: #dc2626;
+    /* Cho chữ lỗi nhỏ hơn nội dung chính */
+    font-size: 13px;
+}
+/* =========================================================
+   B08 - ADMIN DASHBOARD
+   ========================================================= */
+
+.admin-grid {
+    display: grid;
+    /* 3 card cùng một hàng trên màn hình lớn */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.admin-card {
+    display: block;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #0f172a;
+}
+
+    .admin-card:hover {
+        border-color: #2563eb;
+    }
+
+    .admin-card h3 {
+        margin-top: 0;
+    }
+
+@media (max-width: 800px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==================== MENU LOGIN ==================== */
+
+.nav-user {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.nav-logout-form {
+    display: inline;
+    margin: 0;
+}
+
+.nav-link-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}

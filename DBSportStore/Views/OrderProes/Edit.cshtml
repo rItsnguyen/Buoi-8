@@ -1,0 +1,76 @@
+﻿
+@model DBSportStore.Models.OrderPro
+
+@{
+    ViewBag.Title = "Cập nhật trạng thái đơn hàng";
+    Layout = "~/Views/Shared/_StoreLayout.cshtml";
+}
+
+<h2>Cập nhật trạng thái đơn hàng</h2>
+
+<div class="form-horizontal">
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mã đơn hàng</label>
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.OrderID</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Ngày đặt hàng</label>
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.OrderDate</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Tổng tiền</label>
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.TotalAmount</p>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Edit", "OrderProes", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.OrderID)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                Trạng thái
+            </label>
+
+            <div class="col-md-10">
+                @Html.DropDownList(
+                    "Status",
+                    new SelectList(
+                        new[]
+                        {
+                            "Chờ xử lý",
+                            "Đã xác nhận",
+                            "Đang giao",
+                            "Hoàn thành",
+                            "Đã hủy"
+                        },
+                        Model.Status
+                    ),
+                    new { @class = "form-control" }
+                )
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit"
+                       value="Cập nhật trạng thái"
+                       class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</div>
